@@ -1,15 +1,194 @@
-# Time Capsule Invitation
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Capsule | You're Invited</title>
 
-A futuristic, interactive invitation website built with HTML, CSS, and JavaScript.
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
-## Files
-- `index.html` — page structure
-- `style.css` — neon/futuristic visual design
-- `script.js` — interactive steps, code unlock, countdown, RSVP preview, calendar download
+* {
+  box-sizing: border-box;
+}
 
-## Run
-Open `index.html` in a browser, or publish the repository with GitHub Pages.
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Space Grotesk', sans-serif;
+  color: #f5f2ff;
+  background:
+    radial-gradient(ellipse at top, #25245c 0%, transparent 55%),
+    linear-gradient(145deg, #080b19, #11112a 55%, #080b19);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
 
-Demo access code: `2026`
+.stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .45;
+  background-image: radial-gradient(#fff 1px, transparent 1px);
+  background-size: 45px 45px;
+}
 
-Note: RSVP is a front-end preview only and does not save responses.
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  padding: 40px 28px;
+  border: 1px solid #7773ff66;
+  border-radius: 24px;
+  background: #101329d9;
+  box-shadow: 0 0 70px #6755ff20;
+  text-align: center;
+  backdrop-filter: blur(15px);
+}
+
+.tag {
+  color: #aaa5ff;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: clamp(34px, 8vw, 56px);
+  line-height: 1.1;
+  margin: 22px 0 16px;
+  letter-spacing: -2px;
+}
+
+h1 span {
+  color: #a59cff;
+}
+
+p {
+  color: #b9bfd8;
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+input {
+  display: block;
+  width: 100%;
+  margin: 20px 0 14px;
+  padding: 16px;
+  color: white;
+  background: #080c1b;
+  border: 1px solid #44476e;
+  border-radius: 12px;
+  font: inherit;
+  outline: none;
+}
+
+input:focus {
+  border-color: #a59cff;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 10px;
+  border: 0;
+  border-radius: 12px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  color: #090b19;
+  background: linear-gradient(100deg, #b5aaff, #76e7ef);
+  transition: .2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px #9a8aff55;
+}
+
+button.secondary {
+  color: #e2deff;
+  background: #242744;
+  border: 1px solid #555581;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.choice {
+  margin-top: 12px;
+}
+
+.message {
+  color: #a9f6df;
+  min-height: 24px;
+}
+
+.invite-box {
+  margin: 25px 0;
+  padding: 24px 15px;
+  border: 1px solid #7973c9;
+  border-radius: 18px;
+  background: #191a38;
+}
+
+.big-date {
+  font-size: 34px;
+  color: #b5aaff;
+  font-weight: 700;
+  margin: 15px 0;
+}
+
+.footer {
+  margin-top: 28px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #777eaa;
+}
+</style>
+</head>
+
+<body>
+<div class="stars"></div>
+
+<main class="card">
+  <div class="tag">A MESSAGE THROUGH TIME</div>
+
+  <section id="step1">
+    <h1>Time <span>Capsule</span></h1>
+    <p>
+      Some moments deserve to exist beyond time.
+      Your future is waiting. Are you ready to unlock it?
+    </p>
+
+    <form id="inviteForm">
+      <input
+        id="guestName"
+        type="text"
+        placeholder="Enter your name..."
+        autocomplete="name"
+        required
+      >
+      <button type="submit">OPEN YOUR INVITATION ↗</button>
+    </form>
+  </section>
+
+  <section id="step2" class="hidden">
+    <div class="tag">STEP 02 / TIME SELECTION</div>
+    <h1 id="helloTitle">Hello, traveler.</h1>
+    <p>Choose a direction through time.</p>
+
+    <button class="choice" data-choice="PAST">
+      ↶ VISIT THE PAST
+    </button>
+
+    <button class="choice secondary" data-choice="FUTURE">
+      EXPLORE THE FUTURE ↗
+    </button>
+  </section>
+
+  <section id="step3" class="hidden">
+    <div class="tag">STEP 03 / ACCESS
