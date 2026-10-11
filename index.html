@@ -3,142 +3,299 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Time Capsule Invitation</title>
+<title>Time Capsule | Classified Timeline</title>
 <style>
-* {
-  box-sizing: border-box;
-}
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+* { box-sizing: border-box; }
 body {
   margin: 0;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 20px;
-  background: radial-gradient(circle at top, #30205e, #090817 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at top, #30205c, #080814 70%);
   color: white;
-  font-family: Arial, sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
 }
 .card {
   width: 100%;
-  max-width: 440px;
-  padding: 32px 24px;
-  text-align: center;
-  border: 1px solid #9466ff;
-  border-radius: 22px;
+  max-width: 490px;
+  padding: 30px 24px;
   background: #111027;
-  box-shadow: 0 0 35px #8b5cf633;
+  border: 1px solid #8058c9;
+  border-radius: 22px;
+  box-shadow: 0 0 40px #7544cc30;
 }
 .logo {
+  text-align: center;
   color: #c4b5fd;
   font-size: 12px;
   letter-spacing: 4px;
-  margin-bottom: 35px;
+  margin-bottom: 30px;
 }
 .tag {
   color: #a78bfa;
   font-size: 11px;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   margin-bottom: 20px;
 }
 h1 {
-  font-size: 36px;
+  font-size: clamp(29px, 8vw, 40px);
   line-height: 1.2;
-  color: #d8c9ff;
+  color: #e4d7ff;
 }
 p {
   color: #c2bddc;
-  line-height: 1.8;
   font-size: 14px;
+  line-height: 1.9;
 }
-input, button {
+.orb {
+  text-align: center;
+  font-size: 55px;
+  margin: 20px 0;
+  text-shadow: 0 0 25px #a855f7;
+}
+.step { display: none; }
+.step.active {
+  display: block;
+  animation: reveal .4s ease;
+}
+input {
+  width: 100%;
+  padding: 15px;
+  margin: 12px 0;
+  border: 1px solid #554477;
+  border-radius: 10px;
+  background: #0b0a1b;
+  color: white;
+  font-size: 15px;
+}
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+.main-btn {
   width: 100%;
   padding: 15px;
   margin-top: 14px;
+  border: 0;
   border-radius: 10px;
-  font-size: 15px;
-}
-input {
-  border: 1px solid #554477;
-  background: #0b0a1b;
   color: white;
-}
-button {
-  border: none;
-  background: linear-gradient(90deg, #7c3aed, #a855f7);
-  color: white;
+  background: linear-gradient(90deg, #7540d8, #a855f7);
   font-weight: bold;
-  cursor: pointer;
+  font-size: 13px;
 }
-.step {
-  display: none;
-}
-.step.active {
+.option {
   display: block;
+  width: 100%;
+  padding: 15px;
+  margin: 11px 0;
+  text-align: left;
+  line-height: 1.7;
+  color: #eee7ff;
+  background: #191530;
+  border: 1px solid #4b3b70;
+  border-radius: 11px;
+  font-size: 13px;
 }
-.orb {
-  font-size: 60px;
-  margin: 20px 0;
+.option:hover {
+  border-color: #c4b5fd;
+  background: #272044;
+}
+.progress {
+  height: 3px;
+  background: #302849;
+  margin-bottom: 28px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+#progressBar {
+  height: 100%;
+  width: 0%;
+  background: #b18aff;
+  transition: width .3s;
+}
+.result {
+  padding: 15px;
+  border: 1px solid #59467c;
+  border-radius: 12px;
+  background: #17132d;
+  margin-top: 20px;
 }
 .small {
-  margin-top: 28px;
-  color: #82799f;
+  text-align: center;
+  color: #817796;
   font-size: 10px;
   letter-spacing: 2px;
+  margin-top: 25px;
+}
+#secret {
+  color: #d8c5ff;
+  border-top: 1px solid #554477;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
 <body>
-<div class="card">
-  <div class="logo">TIME CAPSULE</div>
-  <section id="step1" class="step active">
-    <div class="tag">PRIVATE INVITATION / 001</div>
-    <div class="orb">✦</div>
-    <h1>A moment<br>outside of time.</h1>
-    <p>
-      Some moments deserve to be remembered forever.
-      Enter your name to discover your invitation.
-    </p>
-    <form id="inviteForm">
-      <input
-        id="guestName"
-        type="text"
-        placeholder="Enter your name..."
-        required
-      >
-      <button type="submit">OPEN YOUR INVITATION ↗</button>
-    </form>
-    <div class="small">A LITTLE SECRET IS WAITING FOR YOU</div>
-  </section>
-  <section id="step2" class="step">
-    <div class="tag">STEP 02 / YOUR INVITATION</div>
-    <div class="orb">🌙</div>
-    <h1 id="helloTitle">You're invited!</h1>
-    <p>
-      Your invitation is here.
-      A special moment is waiting for you.
-    </p>
-    <p>Save this moment. Make it unforgettable.</p>
-    <div class="small">YOUR JOURNEY HAS JUST BEGUN ✦</div>
-  </section>
+<main class="card">
+<div class="logo">T I M E &nbsp; C A P S U L E</div>
+<div class="progress">
+  <div id="progressBar"></div>
 </div>
+<section id="step1" class="step active">
+  <div class="tag">CLASSIFIED FILE / 001</div>
+  <div class="orb">◉</div>
+  <h1>Somewhere<br>outside of time.</h1>
+  <p>
+    This file was not meant to be found.
+    Enter your name to discover why you are here.
+  </p>
+  <form id="nameForm">
+    <input id="guestName" placeholder="Enter your name..."
+      maxlength="40" required>
+    <button class="main-btn" type="submit">
+      ACCESS THE TIMELINE ↗
+    </button>
+  </form>
+  <div class="small">AUTHORIZED PERSONNEL ONLY</div>
+</section>
+<section id="step2" class="step">
+  <div class="tag">FILE 002 / DESTINATION</div>
+  <div class="orb">⌛</div>
+  <h1 id="greeting">Welcome, traveler.</h1>
+  <p>
+    If time travel became possible tonight,
+    where would you go first?
+  </p>
+  <button class="option" data-answer="The past">
+    ← THE PAST<br>Return to a moment that has already happened.
+  </button>
+  <button class="option" data-answer="The future">
+    → THE FUTURE<br>Discover what has not happened yet.
+  </button>
+  <button class="option" data-answer="An impossible moment">
+    ◈ AN IMPOSSIBLE MOMENT<br>Visit a moment that never existed.
+  </button>
+</section>
+<section id="step3" class="step">
+  <div class="tag">FILE 003 / MESSAGE RECEIVED</div>
+  <div class="orb">⌁</div>
+  <h1>A message from yourself.</h1>
+  <p>
+    Your future self has sent you one message.
+    Which one would you open?
+  </p>
+  <button class="option" data-answer="Know the future">
+    "Tell me what happens next."
+  </button>
+  <button class="option" data-answer="Avoid a mistake">
+    "Warn me about one mistake."
+  </button>
+  <button class="option" data-answer="Leave time unchanged">
+    "Don't change anything."
+  </button>
+</section>
+<section id="step4" class="step">
+  <div class="tag">FILE 004 / TEMPORAL PARADOX</div>
+  <div class="orb">∞</div>
+  <h1>Would you change it?</h1>
+  <p>
+    If you could relive one day, but changing it
+    might change your entire future, what would you do?
+  </p>
+  <button class="option" data-answer="Change one thing">
+    CHANGE ONE THING
+  </button>
+  <button class="option" data-answer="Keep every moment">
+    LEAVE EVERYTHING AS IT WAS
+  </button>
+  <button class="option" data-answer="Check the consequences">
+    FIND OUT THE CONSEQUENCES FIRST
+  </button>
+</section>
+<section id="step5" class="step">
+  <div class="tag">FINAL FILE / TIMELINE DETECTED</div>
+  <div class="orb">✧</div>
+  <h1>Your timeline has been found.</h1>
+  <p>
+    You were never supposed to find this.
+    But somehow, you're here.
+  </p>
+  <p>
+    Some moments haven't happened yet.
+    Some memories haven't been created.
+    And some doors open only once.
+  </p>
+  <div class="result">
+    <p>TRAVELER</p>
+    <h2 id="finalName"></h2>
+    <p>YOUR DESTINATION</p>
+    <p id="finalDestination"></p>
+    <p>YOUR MESSAGE</p>
+    <p id="finalMessage"></p>
+  </div>
+  <button class="main-btn" id="revealBtn">
+    UNLOCK THE UNKNOWN ↗
+  </button>
+  <p id="secret" hidden>
+    ✦ The future is not written yet.
+    Perhaps this is where your next unforgettable memory begins.
+  </p>
+  <div class="small">END OF FILE — OR THE BEGINNING?</div>
+</section>
+</main>
 <script>
 (function () {
-  const form = document.getElementById("inviteForm");
-  const nameInput = document.getElementById("guestName");
-  const firstStep = document.getElementById("step1");
-  const secondStep = document.getElementById("step2");
-  const greeting = document.getElementById("helloTitle");
-  form.addEventListener("submit", function (event) {
+  const $ = function (id) {
+    return document.getElementById(id);
+  };
+  let traveler = "";
+  const answers = [];
+  function showStep(number) {
+    document.querySelectorAll(".step").forEach(function (section) {
+      section.classList.remove("active");
+    });
+    $("step" + number).classList.add("active");
+    $("progressBar").style.width = ((number - 1) / 4 * 100) + "%";
+    window.scrollTo(0, 0);
+  }
+  $("nameForm").addEventListener("submit", function (event) {
     event.preventDefault();
-    const name = nameInput.value.trim();
-    if (name.length === 0) {
-      nameInput.focus();
+    traveler = $("guestName").value.trim();
+    if (!traveler) {
+      $("guestName").focus();
       return;
     }
-    greeting.textContent = "You're invited, " + name + "!";
-    firstStep.classList.remove("active");
-    secondStep.classList.add("active");
+    $("greeting").textContent = "Welcome, " + traveler + ".";
+    showStep(2);
+  });
+  document.querySelectorAll(".option").forEach(function (button) {
+    button.addEventListener("click", function () {
+      const currentStep = Number(
+        button.closest(".step").id.replace("step", "")
+      );
+      answers[currentStep - 2] = button.dataset.answer;
+      if (currentStep < 4) {
+        showStep(currentStep + 1);
+      } else {
+        $("finalName").textContent = traveler;
+        $("finalDestination").textContent = answers[0];
+        $("finalMessage").textContent = answers[1];
+        showStep(5);
+      }
+    });
+  });
+  $("revealBtn").addEventListener("click", function () {
+    $("secret").hidden = false;
+    $("revealBtn").textContent = "THE SECRET IS YOURS ✦";
+    $("revealBtn").disabled = true;
+    $("progressBar").style.width = "100%";
   });
 })();
 </script>
