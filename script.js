@@ -1,85 +1,88 @@
 
-const form = document.getElementById('inviteForm');
-const nameInput = document.getElementById('guestName');
-const panel = document.getElementById('invitePanel');
-const choiceArea = document.getElementById('choiceArea');
-const codeArea = document.getElementById('codeArea');
-let guestName = '';
+const $ = id => document.getElementById(id);
+
+let guestName = "";
+let destination = "FUTURE";
+
+function showStep(step) {
+  ["step1", "step2", "step3", "step4"].forEach(id => {
+    $(id).classList.add("hidden");
+  });
+  $(step).classList.remove("hidden");
+}
+
+const form = $("inviteForm");
 
 if (form) {
-  form.addEventListener('submit', function(event) {
+  form.addEventListener("submit", function(event) {
     event.preventDefault();
 
-    guestName = nameInput.value.trim();
-
+    guestName = $("guestName").value.trim();
     if (!guestName) return;
 
-    form.classList.add('hidden');
-    document.getElementById('panelKicker').textContent =
-      'STEP 02 / TIME SELECTION';
-
-    document.getElementById('panelTitle').textContent =
-      `Hello, ${guestName}.`;
-
-    document.getElementById('panelCopy').textContent =
-      'Choose the past or the future to continue.';
-
-    choiceArea.classList.remove('hidden');
+    $("helloTitle").textContent = "Hello, " + guestName + ".";
+    showStep("step2");
   });
 }
 
-document.querySelectorAll('.choice').forEach(function(button) {
-  button.addEventListener('click', function() {
-    choiceArea.classList.add('hidden');
-    codeArea.classList.remove('hidden');
+document.querySelectorAll(".choice").forEach(button => {
+  button.addEventListener("click", function() {
+    destination = this.dataset.choice;
 
-    document.getElementById('panelKicker').textContent =
-      'STEP 03 / ACCESS CODE';
+    $("chosenTime").textContent =
+      "Destination selected: " + destination + ". Enter the secret code.";
 
-    document.getElementById('panelTitle').textContent =
-      'One final step.';
-
-    document.getElementById('panelCopy').textContent =
-      'Enter the secret code: 2026';
+    $("accessCode").value = "";
+    $("codeMessage").textContent = "";
+    showStep("step3");
   });
 });
 
-document.getElementById('unlockBtn').addEventListener('click', function() {
-  const code = document.getElementById('accessCode').value.trim();
-
-  if (code !== '2026') {
-    document.getElementById('codeMessage').textContent =
-      'Incorrect code. Try 2026.';
+$("unlockBtn").addEventListener("click", function() {
+  if ($("accessCode").value.trim() !== "2026") {
+    $("codeMessage").textContent = "Incorrect code. Try 2026.";
     return;
   }
 
-  document.getElementById('welcomeTitle').textContent =
-    `You're invited, ${guestName}!`;
+  $("welcomeText").textContent =
+    "Welcome, " + guestName + ". Your journey into the " +
+    destination.toLowerCase() + " begins now.";
 
-  panel.classList.add('hidden');
-  document.getElementById('invitation').classList.remove('hidden');
+  showStep("step4");
 });
 
-document.getElementById('rsvpBtn').addEventListener('click', function() {
-  document.getElementById('rsvpMessage').textContent =
-    'Your RSVP is noted in this preview!';
+$("accessCode").addEventListener("keydown", function(event) {
+  if (event.key === "Enter") $("unlockBtn").click();
 });
 
-document.getElementById('calendarBtn').addEventListener('click', function() {
-  const eventText =
-    'BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\n' +
-    'DTSTART:20261121T183000\n' +
-    'SUMMARY:Time Capsule Invitation\n' +
-    'LOCATION:The Observatory - 21st Floor\n' +
-    'END:VEVENT\nEND:VCALENDAR';
+$("rsvpBtn").addEventListener("click", function() {
+  $("rsvpMessage").textContent =
+    "Your RSVP is noted in this preview. See you there!";
 
-  const file = new Blob([eventText], { type: 'text/calendar' });
+  $("rsvpBtn").textContent = "CONFIRMED ✓";
+});
+
+$("calendarBtn").addEventListener("click", function() {
+  const eventText = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "BEGIN:VEVENT",
+    "DTSTART:20261121T183000",
+    "SUMMARY:Time Capsule Invitation",
+    "LOCATION:The Observatory - 21st Floor",
+    "END:VEVENT",
+    "END:VCALENDAR"
+  ].join("\r\n");
+
+  const file = new Blob([eventText], {
+    type: "text/calendar;charset=utf-8"
+  });
+
   const url = URL.createObjectURL(file);
-  const link = document.createElement('a');
-
+  const link = document.createElement("a");
   link.href = url;
-  link.download = 'invitation.ics';
+  link.download = "time-capsule-invitation.ics";
   link.click();
 
-  URL.revokeObjectURL(url);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 });
