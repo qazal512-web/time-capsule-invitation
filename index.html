@@ -16,182 +16,309 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: 'Space Grotesk', sans-serif;
-  color: #f5f2ff;
+  color: white;
   background:
-    radial-gradient(ellipse at top, #25245c 0%, transparent 55%),
-    linear-gradient(145deg, #080b19, #11112a 55%, #080b19);
+    radial-gradient(ellipse at top, #29205e 0%, transparent 45%),
+    linear-gradient(145deg, #080817, #11102b, #090914);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   padding: 24px;
 }
 
-.stars {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  opacity: .45;
-  background-image: radial-gradient(#fff 1px, transparent 1px);
-  background-size: 45px 45px;
+.card {
+  width: 100%;
+  max-width: 500px;
+  padding: 36px 28px;
+  border: 1px solid #8b5cf6;
+  border-radius: 24px;
+  background: rgba(15, 14, 38, 0.92);
+  box-shadow: 0 0 40px #7c3aed30;
+  text-align: center;
 }
 
-.card {
-  position: relative;
-  width: 100%;
-  max-width: 580px;
-  padding: 40px 28px;
-  border: 1px solid #7773ff66;
-  border-radius: 24px;
-  background: #101329d9;
-  box-shadow: 0 0 70px #6755ff20;
-  text-align: center;
-  backdrop-filter: blur(15px);
+.logo {
+  color: #c4b5fd;
+  font-size: 12px;
+  letter-spacing: 4px;
+  margin-bottom: 28px;
 }
 
 .tag {
-  color: #aaa5ff;
+  color: #a78bfa;
   font-size: 11px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 18px;
 }
 
 h1 {
-  font-size: clamp(34px, 8vw, 56px);
-  line-height: 1.1;
-  margin: 22px 0 16px;
-  letter-spacing: -2px;
-}
-
-h1 span {
-  color: #a59cff;
+  font-size: clamp(32px, 8vw, 46px);
+  line-height: 1.15;
+  margin: 12px 0;
+  background: linear-gradient(90deg, #fff, #c4b5fd, #a78bfa);
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 p {
-  color: #b9bfd8;
+  color: #b8b5d5;
   line-height: 1.8;
   font-size: 14px;
 }
 
-input {
-  display: block;
+input, select {
   width: 100%;
-  margin: 20px 0 14px;
-  padding: 16px;
-  color: white;
-  background: #080c1b;
-  border: 1px solid #44476e;
+  padding: 15px;
+  margin: 12px 0;
   border-radius: 12px;
+  border: 1px solid #49416e;
+  background: #111027;
+  color: white;
   font: inherit;
   outline: none;
 }
 
-input:focus {
-  border-color: #a59cff;
+input:focus, select:focus {
+  border-color: #a78bfa;
+  box-shadow: 0 0 12px #8b5cf640;
 }
 
 button {
   width: 100%;
   padding: 15px;
-  margin-top: 10px;
-  border: 0;
+  margin-top: 12px;
+  border: none;
   border-radius: 12px;
+  color: white;
+  background: linear-gradient(90deg, #7c3aed, #a855f7);
   font: inherit;
   font-weight: 700;
   cursor: pointer;
-  color: #090b19;
-  background: linear-gradient(100deg, #b5aaff, #76e7ef);
-  transition: .2s;
+  transition: 0.2s;
 }
 
 button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 25px #9a8aff55;
+  box-shadow: 0 0 22px #a855f755;
 }
 
-button.secondary {
-  color: #e2deff;
-  background: #242744;
-  border: 1px solid #555581;
+.secondary {
+  background: transparent;
+  border: 1px solid #65558e;
 }
 
-.hidden {
-  display: none !important;
+.step {
+  display: none;
 }
 
-.choice {
-  margin-top: 12px;
+.step.active {
+  display: block;
+  animation: appear 0.5s ease;
+}
+
+.orb {
+  font-size: 58px;
+  margin: 18px 0;
+  filter: drop-shadow(0 0 20px #a855f7);
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #8b5cf6, transparent);
+  margin: 24px 0;
+}
+
+.small {
+  font-size: 11px;
+  color: #777394;
+  margin-top: 24px;
 }
 
 .message {
-  color: #a9f6df;
+  color: #c4b5fd;
   min-height: 24px;
+  font-size: 13px;
 }
 
-.invite-box {
-  margin: 25px 0;
-  padding: 24px 15px;
-  border: 1px solid #7973c9;
-  border-radius: 18px;
-  background: #191a38;
-}
-
-.big-date {
-  font-size: 34px;
-  color: #b5aaff;
-  font-weight: 700;
-  margin: 15px 0;
-}
-
-.footer {
-  margin-top: 28px;
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: #777eaa;
+@keyframes appear {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
 
 <body>
-<div class="stars"></div>
-
 <main class="card">
-  <div class="tag">A MESSAGE THROUGH TIME</div>
 
-  <section id="step1">
-    <h1>Time <span>Capsule</span></h1>
+  <div class="logo">T I M E &nbsp; C A P S U L E</div>
+
+  <section id="step1" class="step active">
+    <div class="tag">PRIVATE INVITATION / 001</div>
+    <div class="orb">✦</div>
+    <h1>A moment<br>outside of time.</h1>
     <p>
-      Some moments deserve to exist beyond time.
-      Your future is waiting. Are you ready to unlock it?
+      Some moments deserve to be remembered forever.
+      Enter your name to discover your invitation.
     </p>
 
     <form id="inviteForm">
-      <input
-        id="guestName"
-        type="text"
-        placeholder="Enter your name..."
-        autocomplete="name"
-        required
-      >
+      <input id="guestName" type="text"
+        placeholder="Enter your name..." required maxlength="40">
       <button type="submit">OPEN YOUR INVITATION ↗</button>
     </form>
+
+    <div class="small">A LITTLE SECRET IS WAITING FOR YOU</div>
   </section>
 
-  <section id="step2" class="hidden">
-    <div class="tag">STEP 02 / TIME SELECTION</div>
-    <h1 id="helloTitle">Hello, traveler.</h1>
-    <p>Choose a direction through time.</p>
+  <section id="step2" class="step">
+    <div class="tag">STEP 02 / YOUR INVITATION</div>
+    <div class="orb">🌙</div>
+    <h1 id="helloTitle">You're invited.</h1>
+    <p>
+      Welcome to a little universe made for one special moment.
+      Choose your preferred time below.
+    </p>
 
-    <button class="choice" data-choice="PAST">
-      ↶ VISIT THE PAST
-    </button>
+    <label for="chosenTime">Choose a time</label>
+    <select id="chosenTime">
+      <option value="18:00">6:00 PM</option>
+      <option value="19:00">7:00 PM</option>
+      <option value="20:00">8:00 PM</option>
+      <option value="21:00">9:00 PM</option>
+    </select>
 
-    <button class="choice secondary" data-choice="FUTURE">
-      EXPLORE THE FUTURE ↗
-    </button>
+    <button id="continueBtn" type="button">CONTINUE →</button>
+    <button class="secondary backBtn" type="button" data-back="step1">GO BACK</button>
   </section>
 
-  <section id="step3" class="hidden">
-    <div class="tag">STEP 03 / ACCESS
-      <script src="script.js"></script>
+  <section id="step3" class="step">
+    <div class="tag">STEP 03 / ACCESS</div>
+    <div class="orb">🔐</div>
+    <h1>One little secret.</h1>
+    <p>Enter the invitation code to unlock your final message.</p>
+
+    <input id="accessCode" type="text"
+      placeholder="Enter access code..." autocomplete="off">
+
+    <button id="unlockBtn" type="button">UNLOCK MY MESSAGE ✧</button>
+    <p id="codeMessage" class="message"></p>
+    <button class="secondary backBtn" type="button" data-back="step2">GO BACK</button>
+  </section>
+
+  <section id="step4" class="step">
+    <div class="tag">STEP 04 / THE MOMENT</div>
+    <div class="orb">💜</div>
+    <h1>You're on the list.</h1>
+    <p id="welcomeText">
+      Your special moment is waiting.
+    </p>
+
+    <div class="divider"></div>
+
+    <p><strong>YOUR INVITATION DETAILS</strong></p>
+    <p>Date: November 21, 2026</p>
+    <p id="finalTime">Time: 7:00 PM</p>
+
+    <button id="rsvpBtn" type="button">YES, I'LL BE THERE ✓</button>
+    <p id="rsvpMessage" class="message"></p>
+    <button id="calendarBtn" class="secondary" type="button">
+      ADD TO CALENDAR
+    </button>
+    <div class="small">MADE FOR A MOMENT WORTH REMEMBERING ✦</div>
+  </section>
+
+</main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+
+function showStep(stepId) {
+  document.querySelectorAll('.step').forEach((step) => {
+    step.classList.remove('active');
+  });
+
+  $(stepId).classList.add('active');
+}
+
+$('inviteForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const name = $('guestName').value.trim();
+
+  if (!name) {
+    $('guestName').focus();
+    return;
+  }
+
+  $('helloTitle').textContent = 'For you, ' + name + '.';
+  showStep('step2');
+});
+
+$('continueBtn').addEventListener('click', function() {
+  showStep('step3');
+});
+
+document.querySelectorAll('.backBtn').forEach((button) => {
+  button.addEventListener('click', function() {
+    showStep(button.dataset.back);
+  });
+});
+
+$('unlockBtn').addEventListener('click', function() {
+  const code = $('accessCode').value.trim();
+
+  if (code === '2026') {
+    const name = $('guestName').value.trim();
+    $('welcomeText').textContent =
+      'Dear ' + name +
+      ', this little moment is yours. We hope it becomes a beautiful memory.';
+    $('finalTime').textContent =
+      'Time: ' + $('chosenTime').options[$('chosenTime').selectedIndex].text;
+
+    $('codeMessage').textContent = '';
+    showStep('step4');
+  } else {
+    $('codeMessage').textContent =
+      'Not quite! Try the invitation code: 2026';
+  }
+});
+
+$('rsvpBtn').addEventListener('click', function() {
+  $('rsvpMessage').textContent =
+    'Your RSVP is confirmed on this page. See you there! ✨';
+  $('rsvpBtn').textContent = 'CONFIRMED ✓';
+});
+
+$('calendarBtn').addEventListener('click', function() {
+  const date = '20261121';
+  const time = $('chosenTime').value.replace(':', '') + '00';
+  const name = $('guestName').value.trim();
+
+  const eventText = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'BEGIN:VEVENT',
+    'UID:time-capsule-invitation-2026@example.com',
+    'DTSTART:' + date + 'T' + time,
+    'SUMMARY:Time Capsule Invitation',
+    'DESCRIPTION:Invitation for ' + name,
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+
+  const blob = new Blob([eventText], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+
+  link.href = url;
+  link.download = 'time-capsule-invitation.ics';
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  URL.revokeObjectURL(url);
+});
+</script>
+
 </body>
 </html>
